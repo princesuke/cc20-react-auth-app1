@@ -14,3 +14,10 @@ export async function sendForgotPassword(email) {
   const res = await publicApi.post("/auth/forgot-password", { email });
   return res.data.link;
 }
+
+export async function resetPassword(token, newPassword) {
+  const res = await publicApi.post(`/auth/reset-password/${token}`, {
+    password: newPassword,
+  });
+  return res.data;
+}
