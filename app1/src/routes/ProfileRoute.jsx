@@ -1,12 +1,18 @@
 import { Navigate, Outlet } from "react-router";
 import { useAuthStore } from "../stores/authStore";
 
-export default function ProfileRoute() {
-  const user = useAuthStore((state) => state.user);
+// (component export removed, only route config is exported below)
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+import ProfilePage from "../pages/ProfilePage";
+import WalletPage from "../pages/WalletPage";
+import { protectedLoader } from "../loaders/protectedLoader";
 
-  return <Outlet />;
-}
+const profileRoute = {
+  element: <ProfileRoute />,
+  children: [
+    { path: "/profile", element: <ProfilePage />, loader: protectedLoader },
+    { path: "/wallet", element: <WalletPage />, loader: protectedLoader },
+  ],
+};
+
+export default profileRoute;
