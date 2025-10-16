@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import * as authService from "../services/authService";
+import * as authService from "../api/auth";
 
 import { isTokenExpired } from "../utils/tokenUtils";
 
