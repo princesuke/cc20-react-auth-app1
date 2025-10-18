@@ -7,5 +7,6 @@ const adminRoute = {
   loader: (args) =>
     protectedLoader({ ...args, context: { allowedRoles: ["admin"] } }),
 };
+// allowedRoles={["staff", "manager"]}
 
 export default adminRoute;
