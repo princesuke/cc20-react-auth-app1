@@ -9,15 +9,15 @@ import AuthDebugPage from "../pages/AuthDebugPage";
 import DashboardPage from "../pages/DashboardPage";
 import ForgotPasswordPage from "../pages/ForgotPasswordPage";
 import ResetPasswordPage from "../pages/ResetPasswordPage";
-import ProfilePage from "../pages/ProfilePage";
-import WalletPage from "../pages/WalletPage";
+// import ProfilePage from "../pages/ProfilePage";
+// import WalletPage from "../pages/WalletPage";
 import NotfoundPage from "../pages/NotfoundPage";
 import { useAuthStore } from "../stores/authStore";
 // import { getAuthStatus } from "../services/authService";
 import PublicRoute from "./PublicRoute";
-import profileRoute from "./ProfileRoute";
+import profileRoute from "./ProfileRoutes";
 
-import adminRoute from "./adminRoute";
+import adminRoute from "./adminRoutes";
 
 import { protectedLoader } from "../loaders/protectedLoader";
 import { protectedAction } from "../actions/protectedAction";
@@ -32,6 +32,13 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
+    loader: () => {
+      const user = useAuthStore.getState().user;
+      if (user) {
+        throw redirect("/");
+      }
+      return null;
+    },
   },
   profileRoute,
   adminRoute,
@@ -42,6 +49,4 @@ const router = createBrowserRouter([
   { path: "*", element: <Navigate to="/not-found" replace /> },
 ]);
 
-export default function AppRouter() {
-  return <RouterProvider router={router} />;
-}
+export default router;

@@ -2,6 +2,7 @@
 // import AuthDebugPage from "./pages/AuthDebugPage"
 // import AppRouter from "./routes/AppRouter"
 
+import { RouterProvider } from "react-router";
 import router from "./router";
 
 function App() {
